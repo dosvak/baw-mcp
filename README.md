@@ -17,7 +17,13 @@ behind the Dosvak IBM Business Automation Workflow projects:
   Container Version Manager, Instance Purge, Task Lists, Test Data Generator, Headless Process Portal);
 - **install runbooks**: BAW 26 traditional single node (Db2, WAS ND, IHS, Case), Workflow Server, OpenLDAP lab directory, ODM 9.6 on
   Liberty, FileNet CPE 5.7 on WAS 9;
-- the **TWX Code Analyzer rule catalogue** (156 `TCA-*` rules with what they check and how to fix) so agents write code that passes review.
+- the **TWX Code Analyzer rule catalogue** (156 `TCA-*` rules with what they check and how to fix) so agents write code that passes review;
+- **how-to recipes** (e-mail, REST with auth, UCA / timers, REST-driven processes, team filters, documents, ODM, migration, install, BPMConfig,
+  tests, coach tables, EPV / env vars, errors, purge, import troubleshooting, custom views, SQL, building an app step by step, generated TWX,
+  LDAP, CP4BA delivery, performance, export / artifact source, CI/CD + scenario tests) and **build + test guides per artifact type**;
+- **product topics**: App Connect, FileNet + Navigator, ODM, Case, BAI / Kafka / PDW, PFS / Workplace / portals, the designers, OpenShift
+  cluster setup and a CP4BA operator install guide (marked unvalidated until we run it);
+- the **product database schema** (682 tables) and **reference tooling** (43 scripts) on request.
 
 ## Connect
 
@@ -39,14 +45,21 @@ Cursor / VS Code / Windsurf / Continue / custom clients: the same URL as an HTTP
 
 | Tool | Use |
 |---|---|
-| `search_knowledge(query, category?, kinds?, limit?)` | natural-language search over topics, analyzer rules and REST calls — ranked ids with snippets |
-| `get_topic(id)`, `list_topics(category?)` | full topic text; browse by category: method, authoring, designs, cp4ba, install, headless, analyzer, general, rest |
+| `ask(question, budget?, version?, category?)` | one call: the best passages for a question with topic ids to cite |
+| `search_knowledge(query, category?, kinds?, version?, limit?)` | hybrid search (synonyms such as CSHS / UCA / EPV / PDW understood) over topics, analyzer rules, REST calls, database tables |
+| `get_topic(id)`, `get_section(id, heading)`, `related(id)`, `list_categories()`, `list_topics(category?)` | read and browse: method, authoring, how-to, artifacts (build + test per artifact type), general, products, designs, cp4ba, ocp, install, headless, analyzer |
 | `search_rules(query?, category?, severity?)`, `get_rule(id)` | code-quality rules (`TCA-APP-002`, `TCA-SVC-013`, ...) |
-| `rest_endpoint(query)` | BAW REST calls by id, path or words, with method, path and parameters |
+| `rest_endpoint(query, api?)` | REST calls of the classic v1 API, v2 and `/ops` with method, path and parameters |
+| `db_schema(table or words, db?)` | product database tables and columns (BPMDB 8.6.2, basdb CP4BA 25.0.1) for reporting SQL |
 | `authoring_checklist(target?)` | the delivery checklist for traditional, CP4BA or both |
-| `submit_feedback(question, topicId?, helpful?, comment?)` | tell us what was missing or wrong |
+| `list_tools(query?)`, `get_tool(name)` | reference tooling on request: Python harnesses (direct flow runs, Playwright coach sweeps, imports, design sweeps, CP4BA sign-on), generators, wsadmin / shell scripts, SQL, JS API code |
+| `submit_feedback(...)`, `suggest_topic(title, why, outline?, relatedTo?)` | tell us what was missing or wrong; propose new topics — BAW / CP4BA-related subjects only |
 
-Resources `baw://topic/{id}`, `baw://rules`, `baw://rest`; prompts `design-process-app` and `review-twx`.
+Resources `baw://topic/{id}`, `baw://rules`, `baw://rest`, `baw://guide`; prompts `design-process-app` and `review-twx`.
+Topics drafted but not yet validated are marked as such in every result; verified facts say "verified on <version>".
+
+**Agent skill**: [skills/baw-knowledge/SKILL.md](skills/baw-knowledge/SKILL.md) tells IBM Bob / Claude Code when and how to use the server —
+copy it into your skills folder (`~/.claude/skills/baw-knowledge/`, Bob's skills directory).
 
 Try: *"With the baw-knowledge tools, design a console that purges finished instances on CP4BA, list the REST calls it needs and the
 analyzer rules its service flows must respect, and cite the topics you used."*
