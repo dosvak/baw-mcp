@@ -52,6 +52,8 @@ Cursor / VS Code / Windsurf / Continue / custom clients: the same URL as an HTTP
 | `rest_endpoint(query, api?)` | REST calls of the classic v1 API, v2 and `/ops` with method, path and parameters |
 | `db_schema(table or words, db?)` | product database tables and columns (BPMDB 8.6.2, basdb CP4BA 25.0.1) for reporting SQL |
 | `authoring_checklist(target?)` | the delivery checklist for traditional, CP4BA or both |
+| `build_kit(target?, online?)` | start here to generate a process app: the import rules, the self-contained generator `twxkit.py` with sample and deep test, offline validation, online import / verify recipe |
+| `get_package(query?)` | the finished, tested packages of the published apps - check before building something new |
 | `list_tools(query?)`, `get_tool(name)` | reference tooling on request: Python harnesses (direct flow runs, Playwright coach sweeps, imports, design sweeps, CP4BA sign-on), generators, wsadmin / shell scripts, SQL, JS API code |
 | `submit_feedback(...)`, `suggest_topic(title, why, outline?, relatedTo?)` | tell us what was missing or wrong; propose new topics — BAW / CP4BA-related subjects only |
 

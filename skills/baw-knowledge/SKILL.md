@@ -17,8 +17,12 @@ catalogues (v1 / v2 / ops), the product database schema and reference tooling.
    `search_rules(query, category?, severity?)`.
 3. Before delivering an app, run `authoring_checklist(target)` and walk it; for a test plan read `artifact-test-strategy-overview` and the
    `artifact-*` topics of the artifact types involved.
-4. When tooling is needed (running flows over REST, Playwright coach sweeps, imports, sign-on, generators), call `list_tools(query)` and
+4. To build or generate a process app / TWX, call `build_kit()` first and follow its order of work: `get_package(words)` (a tested package may
+   already exist), then `get_tool('twxkit.py')` + `get_tool('twxkit_sample.py')` and the reference topic `howto-build-a-twx-from-scratch`.
+   Never hand-write TWX object XML, a manifest or product uuids from memory - such packages do not import. Tools flagged
+   `[needs unserved: ...]` by `list_tools` are design references only, not something to re-implement.
+5. When tooling is needed (running flows over REST, Playwright coach sweeps, imports, sign-on, generators), call `list_tools(query)` and
    `get_tool(name)` and adapt the settings (hosts, users are placeholders).
-5. Cite topic ids in your answer. Prefer facts tagged with the user's platform version (`version` filter: 8.6.2, 24, 26, cp4ba25, saas).
-6. If the answer is weak or missing, tell the user and call `submit_feedback`; propose genuinely missing BAW / CP4BA subjects with
+6. Cite topic ids in your answer. Prefer facts tagged with the user's platform version (`version` filter: 8.6.2, 24, 26, cp4ba25, saas).
+7. If the answer is weak or missing, tell the user and call `submit_feedback`; propose genuinely missing BAW / CP4BA subjects with
    `suggest_topic` (related topics only).
