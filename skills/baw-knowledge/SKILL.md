@@ -19,10 +19,19 @@ catalogues (v1 / v2 / ops), the product database schema and reference tooling.
    `artifact-*` topics of the artifact types involved.
 4. To build or generate a process app / TWX, call `build_kit()` first and follow its order of work: `get_package(words)` (a tested package may
    already exist), then `get_tool('twxkit.py')` + `get_tool('twxkit_sample.py')` and the reference topic `howto-build-a-twx-from-scratch`.
+   A business process with user tasks (approval flow, lanes per team, gateways, loops) is built with `App.bpd()` and task coaches from
+   `cshs(inputs=, outputs=, exits=)`: read `howto-build-a-process-with-user-tasks` and copy `get_tool('build_expkit.py')` (the verified
+   Expense Approval Kit). Diagram rules that decide whether the result is usable in the designer: BPD node y is relative to its lane,
+   buttons complete a task through coach exits, coach / service flow nodes need the designer's positive coordinates.
+   Target: `build_kit(target)` with the user's platform; for CP4BA 24-26 build with twxkit `target='cp4ba'` (System Data
+   8.6.0.0_TC, loopback `https://localhost:9443/bas` on the Studio, `/baw-<instance>` on a Process Server, LDAP team members). Deploy
+   a snapshot created on the Center / Studio after the import (`get_tool('designer_snapshot.py')`), never the imported one - it has no
+   compiled theme and renders unstyled on a server. Coach event expressions have no `tw` object: pass inputs with
+   `${Svc}.execute({...})`, never `tw.local.x = ...` (twxkit refuses it).
    Never hand-write TWX object XML, a manifest or product uuids from memory - such packages do not import. Tools flagged
    `[needs unserved: ...]` by `list_tools` are design references only, not something to re-implement.
 5. When tooling is needed (running flows over REST, Playwright coach sweeps, imports, sign-on, generators), call `list_tools(query)` and
    `get_tool(name)` and adapt the settings (hosts, users are placeholders).
-6. Cite topic ids in your answer. Prefer facts tagged with the user's platform version (`version` filter: 8.6.2, 24, 26, cp4ba25, saas).
+6. Cite topic ids in your answer. Prefer facts tagged with the user's platform version (`version` filter: 8.6.2, 24, 26, cp4ba24, cp4ba25, cp4ba26, saas).
 7. If the answer is weak or missing, tell the user and call `submit_feedback`; propose genuinely missing BAW / CP4BA subjects with
    `suggest_topic` (related topics only).
