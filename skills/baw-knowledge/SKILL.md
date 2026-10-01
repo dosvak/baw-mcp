@@ -26,7 +26,8 @@ catalogues (v1 / v2 / ops), the product database schema and reference tooling.
    Target: `build_kit(target)` with the user's platform; for CP4BA 24-26 build with twxkit `target='cp4ba'` (System Data
    8.6.0.0_TC, loopback `https://localhost:9443/bas` on the Studio, `/baw-<instance>` on a Process Server, LDAP team members). Deploy
    a snapshot created on the Center / Studio after the import (`get_tool('designer_snapshot.py')`), never the imported one - it has no
-   compiled theme and renders unstyled on a server. Coach event expressions have no `tw` object: pass inputs with
+   compiled theme and renders unstyled on a server. On CP4BA, import without a browser with `get_tool('studio_import.py')`
+   (REST import + validation + deployable snapshot). Coach event expressions have no `tw` object: pass inputs with
    `${Svc}.execute({...})`, never `tw.local.x = ...` (twxkit refuses it).
    Never hand-write TWX object XML, a manifest or product uuids from memory - such packages do not import. Tools flagged
    `[needs unserved: ...]` by `list_tools` are design references only, not something to re-implement.
